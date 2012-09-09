@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.github.jlgrock.javascript</groupId>
+	<artifactId>closure-library</artifactId>
+	<version>@SVN_VERSION@</version>
+	<packaging>pom</packaging>
+	<name>Google's Closure Library</name>
+	<description>
+		This is a helpful packaging of source code for JavaScript
+		developers using Maven.  This is published on schedule, so not
+		all subversion revisions are available.  Just those that are
+		available when the bundling process begins.
+	</description>
+
+	<properties>
+
+	</properties>
+
+	<build>
+		<plugins>
+
+			<!-- Checks out library -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-scm-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>checkout</id>
+						<goals>
+							<goal>checkout</goal>
+						</goals>
+						<phase>generate-resources</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<useExport>true</useExport>
+					<checkoutDirectory>${project.build.directory}/checkout</checkoutDirectory>
+					<connectionType>connection</connectionType>
+					<connectionUrl>scm:svn:http://closure-library.googlecode.com/svn/trunk/</connectionUrl>
+					<developerConnectionUrl>scm:svn:http://closure-library.googlecode.com/svn/trunk/</developerConnectionUrl>
+				</configuration>
+			</plugin>
+			
+			<!-- Repackages and marks artifacts for deployment -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<id>package-closure</id>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<descriptors>
+								<descriptor>src/main/resources/assembly.xml</descriptor>
+							</descriptors>
+							<attach>true</attach>
+							<appendAssemblyId>false</appendAssemblyId>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

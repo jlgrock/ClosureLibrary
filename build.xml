@@ -1,0 +1,25 @@
+<project name="MyProject" default="createPomFromTemplate" basedir=".">
+
+	<description>
+    	This will replace the version number in the maven file with the current revision 
+		within Subversion.  This requires a machine with a c-shell and subversion installed.
+    </description>
+
+	<property name="url">http://closure-library.googlecode.com/svn/trunk/</property>
+
+	<target name="createPomFromTemplate" depends="svnInfo" description="Will copy the pom-template.xml to pom.xml, making the appropriate replacements.">
+		<copy file="pom-template.xml" tofile="pom.xml" filtering="yes" overwrite="yes">
+			<filterset>
+				<filter token="SVN_VERSION" value="${build.version}-SNAPSHOT" />
+			</filterset>
+		</copy>
+	</target>
+
+	<target name="svnInfo" description="Open a c-shell and execute a subversion command to get the current version">
+		<exec executable="sh" outputproperty="build.version">
+			<arg value="-c" />
+			<arg value="svn --non-interactive info ${url} | grep Revision | awk '{print $2}'" />
+		</exec>
+	</target>
+
+</project>
