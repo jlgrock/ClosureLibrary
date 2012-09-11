@@ -1,24 +1,68 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+		<relativePath />
+	</parent>
+	
 	<groupId>com.github.jlgrock.javascript</groupId>
 	<artifactId>closure-library</artifactId>
-	<version>2143-SNAPSHOT</version>
+	<version>2156-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Google's Closure Library</name>
 	<description>
 		This is a helpful packaging of source code for JavaScript
-		developers using Maven.  This is published on schedule (as
-		opposed to being triggered by commits), so not all subversion
-		revisions are available.
+		developers using Maven.  This is published on schedule, so not
+		all subversion revisions are available.  Just those that are
+		available when the bundling process begins.xxx
 	</description>
 
 	<properties>
+		<github.project.name>ClosureLibrary</github.project.name>
+		<git.wagon.version>0.3.1</git.wagon.version>
+		<maven.scm.version>1.6</maven.scm.version>
 	</properties>
+	<url>https://github.com/jlgrock/ClosureLibrary</url>
+
+	<issueManagement>
+		<url>https://github.com/jlgrock/ClosureLibrary/issues</url>
+		<system>GitHub Issues</system>
+	</issueManagement>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<build>
-		<plugins>
+		<!-- used for the transport of artifact between repositories. This requires 
+			git to be installed locally. -->
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.scm</groupId>
+				<artifactId>maven-scm-provider-gitexe</artifactId>
+				<version>${maven.scm.version}</version>
+			</extension>
+			<extension>
+				<groupId>org.apache.maven.scm</groupId>
+				<artifactId>maven-scm-manager-plexus</artifactId>
+				<version>${maven.scm.version}</version>
+			</extension>
+			<extension>
+				<groupId>org.kathrynhuxtable.maven.wagon</groupId>
+				<artifactId>wagon-gitsite</artifactId>
+				<version>${git.wagon.version}</version>
+			</extension>
+		</extensions>
 
+		<plugins>
 			<!-- Checks out library -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -66,4 +110,55 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	
+	<scm>
+		<url>http://github.com/jlgrock/${github.project.name}</url>
+		<connection>scm:git:git://github.com/jlgrock/${github.project.name}.git</connection>
+		<developerConnection>scm:git:git@github.com:jlgrock/${github.project.name}.git</developerConnection>
+	</scm>
+
+	<ciManagement>
+		<system>Jenkins</system>
+	</ciManagement>
+
+	<developers>
+		<developer>
+			<name>Justin Grant</name>
+			<roles>
+				<role>Project Lead</role>
+				<role>CM</role>
+			</roles>
+			<timezone>-5</timezone>
+			<email>jlgrock@hotmail.com</email>
+		</developer>
+	</developers>
 </project>
