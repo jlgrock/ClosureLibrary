@@ -10,7 +10,7 @@
 
 	<groupId>com.github.jlgrock.javascript</groupId>
 	<artifactId>closure-library</artifactId>
-	<version>2157-SNAPSHOT</version>
+	<version>2157</version>
 	<packaging>pom</packaging>
 	<name>Google's Closure Library</name>
 	<description>
@@ -155,7 +155,7 @@
 		<url>http://github.com/jlgrock/ClosureLibrary</url>
 		<connection>scm:git:git://github.com/jlgrock/ClosureLibrary.git</connection>
 		<developerConnection>scm:git:git@github.com:jlgrock/ClosureLibrary.git</developerConnection>
-	  <tag>HEAD</tag>
+	  <tag>closure-library-2157</tag>
   </scm>
 
 	<ciManagement>
