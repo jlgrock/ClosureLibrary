@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -11,7 +10,7 @@
 
 	<groupId>com.github.jlgrock.javascript</groupId>
 	<artifactId>closure-library</artifactId>
-	<version>2385-SNAPSHOT</version>
+	<version>2385</version>
 	<packaging>pom</packaging>
 	<name>Google's Closure Library</name>
 	<description>
@@ -156,7 +155,8 @@
 		<url>http://github.com/jlgrock/${github.project.name}</url>
 		<connection>scm:git:git://github.com/jlgrock/${github.project.name}.git</connection>
 		<developerConnection>scm:git:git@github.com:jlgrock/${github.project.name}.git</developerConnection>
-	</scm>
+	  <tag>closure-library-2385</tag>
+  </scm>
 
 	<ciManagement>
 		<system>Jenkins</system>
