@@ -1,4 +1,4 @@
-<project name="MyProject" default="createPomFromTemplate" basedir=".">
+<project name="MyProject" default="createPomFromInput" basedir=".">
 
 	<description>
     	This will replace the version number in the maven file with the current revision 
