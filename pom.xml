@@ -25,7 +25,7 @@
 		<github.project.name>ClosureLibrary</github.project.name>
 		<git.wagon.version>0.3.1</git.wagon.version>
 		<maven.scm.version>1.6</maven.scm.version>
-		<release.plugin.version>2.3.2</release.plugin.version>
+		<release.plugin.version>2.4.2</release.plugin.version>
 	</properties>
 
 	<url>https://github.com/jlgrock/ClosureLibrary</url>
