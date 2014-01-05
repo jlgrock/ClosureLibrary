@@ -11,7 +11,7 @@
 
 	<groupId>com.github.jlgrock.javascript</groupId>
 	<artifactId>closure-library</artifactId>
-	<version>99cd91-SNAPSHOT</version>
+	<version>99cd91</version>
 	<packaging>pom</packaging>
 	<name>Google's Closure Library</name>
 	<description>
