@@ -5,21 +5,50 @@
 		within Subversion.  This requires a machine with a c-shell and subversion installed.
     </description>
 
-	<property name="url">http://closure-library.googlecode.com/svn/trunk/</property>
+	<property name="svn-url">http://closure-library.googlecode.com/svn/trunk/</property>
+	<property name="git-url">https://code.google.com/p/closure-library/</property>
+	<property name="git-branch">HEAD</property>
 
-	<target name="createPomFromTemplate" depends="svnInfo" description="Will copy the pom-template.xml to pom.xml, making the appropriate replacements.">
+	<target name="createPomFromGit" depends="gitInfo" description="Will copy the pom-template.xml to pom.xml, making the appropriate replacements.">
 		<copy file="pom-template.xml" tofile="pom.xml" filtering="yes" overwrite="yes">
 			<filterset>
-				<filter token="SVN_VERSION" value="${build.version}-SNAPSHOT" />
+				<filter token="REPO_VERSION" value="${build.version}-SNAPSHOT" />
 			</filterset>
 		</copy>
+	</target>
+
+	<target name="createPomFromSvn" depends="svnInfo" description="Will copy the pom-template.xml to pom.xml, making the appropriate replacements.">
+		<copy file="pom-template.xml" tofile="pom.xml" filtering="yes" overwrite="yes">
+			<filterset>
+				<filter token="REPO_VERSION" value="${build.version}-SNAPSHOT" />
+			</filterset>
+		</copy>
+	</target>
+
+	<target name="createPomFromInput" description="Will copy the pom-template.xml to pom.xml, making the appropriate replacements.">
+		<fail unless="repo.version">You forgot to set 'repo.version'!</fail>
+		<echo message="setting repository version from git to ${repo.version}" />
+		<copy file="pom-template.xml" tofile="pom.xml" filtering="yes" overwrite="yes">
+			<filterset>
+				<filter token="REPO_VERSION" value="${repo.version}-SNAPSHOT" />
+			</filterset>
+		</copy>
+		<echo message="Template created" />
 	</target>
 
 	<target name="svnInfo" description="Open a c-shell and execute a subversion command to get the current version">
 		<exec executable="sh" outputproperty="build.version">
 			<arg value="-c" />
-			<arg value="svn --non-interactive info ${url} | grep Revision | awk '{print $2}'" />
+			<arg value="svn --non-interactive info ${svn-url} | grep Revision | awk '{print $2}'" />
 		</exec>
+		<echo message="setting repository version from subversion to ${build.version}" />
 	</target>
 
+	<target name="gitInfo" description="Open a c-shell and execute a git command to get the current version">
+		<exec executable="sh" outputproperty="build.version">
+			<arg value="-c" />
+			<arg value="git ls-remote ${git-url} --branch ${git-branch} | awk '{print $1}'" />
+		</exec>
+		<echo message="setting repository version from git to ${build.version}" />
+	</target>
 </project>

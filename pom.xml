@@ -10,7 +10,7 @@
 
 	<groupId>com.github.jlgrock.javascript</groupId>
 	<artifactId>closure-library</artifactId>
-	<version>2386-SNAPSHOT</version>
+	<version>99cd91-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Google's Closure Library</name>
 	<description>
@@ -85,11 +85,10 @@
 					</execution>
 				</executions>
 				<configuration>
-					<useExport>true</useExport>
 					<checkoutDirectory>${project.build.directory}/checkout</checkoutDirectory>
 					<connectionType>connection</connectionType>
-					<connectionUrl>scm:svn:http://closure-library.googlecode.com/svn/trunk/</connectionUrl>
-					<developerConnectionUrl>scm:svn:http://closure-library.googlecode.com/svn/trunk/</developerConnectionUrl>
+					<connectionUrl>scm:git:https://code.google.com/p/closure-library/</connectionUrl>
+					<developerConnectionUrl>scm:git:https://code.google.com/p/closure-library/</developerConnectionUrl>
 				</configuration>
 			</plugin>
 
@@ -155,7 +154,7 @@
 		<url>http://github.com/jlgrock/${github.project.name}</url>
 		<connection>scm:git:git://github.com/jlgrock/${github.project.name}.git</connection>
 		<developerConnection>scm:git:git@github.com:jlgrock/${github.project.name}.git</developerConnection>
-	  <tag>HEAD</tag>
+	  <tag>closure-library-99cd91</tag>
   </scm>
 
 	<ciManagement>
