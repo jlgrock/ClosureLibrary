@@ -47,7 +47,7 @@
 	<target name="gitInfo" description="Open a c-shell and execute a git command to get the current version">
 		<exec executable="sh" outputproperty="build.version">
 			<arg value="-c" />
-			<arg value="git ls-remote ${git-url} --branch ${git-branch} | awk '{print $1}'" />
+			<arg value="git ls-remote ${git-url} --branch ${git-branch} | awk '{print $1}' | cut -c1-6" />
 		</exec>
 		<echo message="setting repository version from git to ${build.version}" />
 	</target>
