@@ -19,7 +19,7 @@ Requires you to install the following:
 ## Instructions on Use
 
 1. Clone this repo
-2. run `ant createPomFromInput -Drepo.version=x` (replacing 'x' with the version)
-3. Commit your changes locally
-4. Run the release with the profile to perform releases with `mvn clean deploy release:clean release:prepare release:perform`
+2. run `ant createPomFromInput -Drepo.version=x` (replacing 'x' with the version) or, if you just want the most recent version, run `ant createPomFromGit`
+3. Commit your changes locally (which should only be the generated pom file)
+4. Run the release with the profile to perform releases with `mvn release:clean release:prepare release:perform`
 
